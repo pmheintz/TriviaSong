@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         // Set slider's max value to songs duration
         positionSlider.maximumValue = Float(songPlayer.duration)
         
+        // Timer to update slider position
         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.updateSlider), userInfo: nil, repeats: true)
     }
 
@@ -93,6 +94,7 @@ class ViewController: UIViewController {
         
     }
     
+    // Function to update slider. @objc attribute required for functionality
     @objc func updateSlider() {
         positionSlider.value = Float(songPlayer.currentTime)
     }
