@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,63 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TriviaSong" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Jeopardy_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="m3i-TC-4aD">
+                                <rect key="frame" x="87" y="36" width="200" height="77"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-V6-b5G">
+                                <rect key="frame" x="137" y="283" width="100" height="100"/>
+                                <state key="normal" image="pause"/>
+                                <connections>
+                                    <action selector="playPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dzv-mu-d4C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsY-78-nwy">
+                                <rect key="frame" x="16" y="609" width="343" height="38"/>
+                                <state key="normal" title="RESTART" backgroundImage="whiteButton"/>
+                                <connections>
+                                    <action selector="restartSong:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BQs-hJ-ygj"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="gbb-sB-tpf">
+                                <rect key="frame" x="14" y="563" width="347" height="31"/>
+                                <connections>
+                                    <action selector="changePlaybackTime:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZBB-IU-K4d"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.30980392156862746" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KsY-78-nwy" secondAttribute="trailing" constant="16" id="4SU-0M-AIf"/>
+                            <constraint firstItem="gbb-sB-tpf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="MFu-mm-cbi"/>
+                            <constraint firstItem="KsY-78-nwy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Mvl-uD-ZvY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gbb-sB-tpf" secondAttribute="trailing" constant="16" id="UWm-cG-Gfd"/>
+                            <constraint firstItem="KsY-78-nwy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XNF-Wc-8jM"/>
+                            <constraint firstItem="tN8-V6-b5G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aQO-0R-heL"/>
+                            <constraint firstItem="tN8-V6-b5G" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bk9-uy-Xfa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KsY-78-nwy" secondAttribute="bottom" constant="20" id="cEs-1z-mI6"/>
+                            <constraint firstItem="KsY-78-nwy" firstAttribute="top" secondItem="gbb-sB-tpf" secondAttribute="bottom" constant="16" id="dNs-h8-Uh7"/>
+                            <constraint firstItem="m3i-TC-4aD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hTX-jP-jPD"/>
+                            <constraint firstItem="m3i-TC-4aD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="ivX-Ba-1NG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="positionSlider" destination="gbb-sB-tpf" id="oT9-Q5-xTn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Jeopardy_Logo" width="200" height="77"/>
+        <image name="pause" width="100" height="100"/>
+        <image name="whiteButton" width="29" height="38"/>
+    </resources>
 </document>
