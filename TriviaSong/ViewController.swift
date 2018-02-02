@@ -85,12 +85,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changePlaybackTime(_ sender: UISlider) {
+        var resumePlaying = false
+        if songPlayer.isPlaying {
+            resumePlaying = true
+        }
         // Stop playback to adjust time
         songPlayer.stop()
         // Convert slider value to time interval value
         songPlayer.currentTime = TimeInterval(positionSlider.value)
         songPlayer.prepareToPlay()
-        songPlayer.play()
+        if resumePlaying {
+            songPlayer.play()
+        }
         
     }
     
