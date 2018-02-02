@@ -13,6 +13,8 @@ import AVFoundation
 class ViewController: UIViewController {
     // Instantiate the audio player
     var songPlayer = AVAudioPlayer()
+    // Variable to return playback to previous state
+    var wasPlaying: Bool!
     @IBOutlet weak var positionSlider: UISlider!
     
     override func viewDidLoad() {
@@ -84,20 +86,30 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func changePlaybackTime(_ sender: UISlider) {
-        var resumePlaying = false
+    @IBAction func onTouchDown(_ sender: UISlider) {
+        // Set playback state to return to it after slide is released
+        // and stop playback while touching the slider
         if songPlayer.isPlaying {
-            resumePlaying = true
+            wasPlaying = true
+        } else {
+            wasPlaying = false
         }
-        // Stop playback to adjust time
         songPlayer.stop()
+    }
+    
+    @IBAction func changePlaybackTime(_ sender: UISlider) {
         // Convert slider value to time interval value
         songPlayer.currentTime = TimeInterval(positionSlider.value)
+        // Prepare song to play at new time position
         songPlayer.prepareToPlay()
-        if resumePlaying {
+    }
+    
+    @IBAction func onSliderRelease(_ sender: UISlider) {
+        // If song was playing before adjusting the slider,
+        // resume on touch up or touch up outside
+        if wasPlaying {
             songPlayer.play()
         }
-        
     }
     
     // Function to update slider. @objc attribute required for functionality
