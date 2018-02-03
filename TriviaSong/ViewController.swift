@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     // Variable to return playback to previous state
     var wasPlaying: Bool!
     @IBOutlet weak var positionSlider: UISlider!
+    @IBOutlet weak var playPauseBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +65,10 @@ class ViewController: UIViewController {
         // Determine if song is playing and start or stop playback
         if songPlayer.isPlaying {
             songPlayer.pause()
-            sender.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
+            playPauseBtn.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
         } else {
             songPlayer.play()
-            sender.setImage(#imageLiteral(resourceName: "pause"), for: UIControlState.normal)
+            playPauseBtn.setImage(#imageLiteral(resourceName: "pause"), for: UIControlState.normal)
         }
     }
     
@@ -81,6 +82,7 @@ class ViewController: UIViewController {
         } else {
         // Song isn't playing, so return to beginning and start playing
             songPlayer.currentTime = 0
+            playPauseBtn.setImage(#imageLiteral(resourceName: "pause"), for: UIControlState.normal)
             songPlayer.prepareToPlay()
             songPlayer.play()
         }
