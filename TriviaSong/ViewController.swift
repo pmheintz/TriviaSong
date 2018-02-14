@@ -118,5 +118,47 @@ class ViewController: UIViewController {
     @objc func updateSlider() {
         positionSlider.value = Float(songPlayer.currentTime)
     }
+    
+    // Function to observe audio interruptions
+    func setupNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(handleInterruption),
+                                       name: .AVAudioSessionInterruption,
+                                       object: nil)
+    }
+    
+    // Function to handle interruptions
+    @objc func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSessionInterruptionType(rawValue: typeValue) else {
+                return
+        }
+        if type == .began {
+            // Interruption began, take appropriate actions
+            if (songPlayer.isPlaying) {
+                wasPlaying = true
+                songPlayer.pause()
+                playPauseBtn.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
+            } else {
+                wasPlaying = false
+            }
+        }
+        else if type == .ended {
+            if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+                let options = AVAudioSessionInterruptionOptions(rawValue: optionsValue)
+                if options.contains(.shouldResume) {
+                    // Interruption Ended - playback should resume
+                    songPlayer.play()
+                    playPauseBtn.setImage(#imageLiteral(resourceName: "pause"), for: UIControlState.normal)
+                } else {
+                    // Interruption Ended - playback should NOT resume
+                    songPlayer.stop()
+                    playPauseBtn.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
+                }
+            }
+        }
+    }
 }
 
